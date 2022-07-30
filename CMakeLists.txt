@@ -17,11 +17,13 @@ ExternalProject_Add(writepad
 
 ExternalProject_Get_Property(writepad source_dir)
 
-INCLUDE_DIRECTORIES(${GTK4_INCLUDE_DIRS})
-LINK_DIRECTORIES(${GTK4_LIBRARY_DIRS})
+INCLUDE_DIRECTORIES(${GTK4_INCLUDE_DIRS} ${source_dir}/Linux/include)
+LINK_DIRECTORIES(${GTK4_LIBRARY_DIRS} ${source_dir}/Linux/Lib)
 
 ADD_DEFINITIONS(${GTK4_CFLAGS_OTHER})
 
 add_executable(writepad-demo main.c)
 
-target_link_libraries(writepad-demo ${GTK4_LIBRARIES} ${source_dir}/Linux/Lib/libWritePadLib.a)
+target_link_libraries(writepad-demo ${GTK4_LIBRARIES} m stdc++ WritePadLib pthread)
+
+file(COPY ${source_dir}/Dictionaries DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
