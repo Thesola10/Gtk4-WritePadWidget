@@ -357,7 +357,15 @@ stylus_gesture_up(GtkGestureStylus *gesture,
 
     size_t srclen = 10, dstlen = 10;
 
-    const UCHR *result = HWR_RecognizeInkData(reco, area->inkData, 0, area->nStrokes, FALSE, FALSE, FALSE, FALSE);
+    const UCHR *result = 
+        HWR_RecognizeInkData(reco,
+                             area->inkData,
+                             0,
+                             area->nStrokes,
+                             FALSE,     // Are we async? (ofc not)
+                             FALSE,     // Flip Y-coords?
+                             FALSE,     // Sort left-to-right (single line)?
+                             FALSE);    // Only recognize strokes marked as "selected"?
 
     int *wcsresult = ucstowcs(result);
     char *u8result = calloc(1, 1000);
