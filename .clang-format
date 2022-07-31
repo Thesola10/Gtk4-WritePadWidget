@@ -1,0 +1,20 @@
+---
+IndentWidth: 4
+
+PointerAlignment: Right
+AlignAfterOpenBracket: Align
+AlignConsecutiveAssignments: AcrossComments
+AlignConsecutiveDeclarations: AcrossComments
+
+AlignEscapedNewlines: Left
+AlignOperands: AlignAfterOperator
+
+AlignTrailingComments: true
+
+AllowShortBlocksOnASingleLine: Empty
+AllowShortEnumsOnASingleLine: true
+
+BreakBeforeBraces: Linux
+IncludeBlocks: Regroup
+---
+# vim: ft=yaml
