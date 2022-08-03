@@ -55,9 +55,22 @@ _impl_WritePadWidget_onStylusUp    (GtkGestureStylus *st,
                                     double x, double y,
                                     WritePadWidget *w);
 
-void _impl_WritePadWidget_snapshot(GtkWidget *w, GtkSnapshot *snap);
-void _impl_WritePadWidget_size_allocate(GtkWidget *widget, int w, int h, int baseline);
-void _impl_WritePadWidget_map(GtkWidget *widget);
-void _impl_WritePadWidget_unmap(GtkWidget *widget);
+void
+_impl_WritePadWidget_snapshot      (GtkWidget *w, GtkSnapshot *snap);
+void
+_impl_WritePadWidget_size_allocate (GtkWidget *widget, int w, int h, int baseline);
+void
+_impl_WritePadWidget_map           (GtkWidget *widget);
+void
+_impl_WritePadWidget_unmap         (GtkWidget *widget);
+
+void _impl_WritePadWidget_set_property (GObject *obj,
+                                        guint propid,
+                                        const GValue *val,
+                                        GParamSpec *psp);
+void _impl_WritePadWidget_get_property (GObject *obj,
+                                        guint propid,
+                                        GValue *val,
+                                        GParamSpec *psp);
 
 #endif //__WRITEPADWIDGET_IMPL_H

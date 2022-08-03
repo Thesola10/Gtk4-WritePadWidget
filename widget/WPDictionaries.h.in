@@ -3,26 +3,25 @@
 
 #include <langid.h>
 
-#define $dictFromPrefix(file) \
-        "@CMAKE_INSTALL_PREFIX@/share/WritePad/Dictionaries/##file##.dct"
+#define $PREFIX "@CMAKE_INSTALL_PREFIX@/share/WritePad/Dictionaries/"
 
 const char *WP_DICT_DEFAULTS[LANGUAGE_SIZE] = {
-    "",                                 /* LANGUAGE_NONE        */
-    $dictFromPrefix(English),           /* LANGUAGE_ENGLISH     */
-    $dictFromPrefix(French),            /* LANGUAGE_FRENCH      */
-    $dictFromPrefix(German),            /* LANGUAGE_GERMAN      */
-    $dictFromPrefix(Spanish),           /* LANGUAGE_SPANISH     */
-    $dictFromPrefix(Italian),           /* LANGUAGE_ITALIAN     */
-    $dictFromPrefix(Swedish),           /* LANGUAGE_SWEDISH     */
-    $dictFromPrefix(Norwegian),         /* LANGUAGE_NORWEGIAN   */
-    $dictFromPrefix(Dutch),             /* LANGUAGE_DUTCH       */
-    $dictFromPrefix(Danish),            /* LANGUAGE_DANISH      */
-    $dictFromPrefix(Portuguese),        /* LANGUAGE_PORTUGUESE  */
-    $dictFromPrefix(Brazilian),         /* LANGUAGE_PORTUGUESEB */
-    $dictFromPrefix(MedicalUS),         /* LANGUAGE_MEDICAL     */
-    $dictFromPrefix(Finnish),           /* LANGUAGE_FINNISH     */
-    $dictFromPrefix(Indonesian),        /* LANGUAGE_INDONESIAN  */
-    $dictFromPrefix(EnglishUK),         /* LANGUAGE_ENGLISHUK   */
+    "",                         /* LANGUAGE_NONE        */
+    $PREFIX "English.dct",      /* LANGUAGE_ENGLISH     */
+    $PREFIX "French.dct",       /* LANGUAGE_FRENCH      */
+    $PREFIX "German.dct",       /* LANGUAGE_GERMAN      */
+    $PREFIX "Spanish.dct",      /* LANGUAGE_SPANISH     */
+    $PREFIX "Italian.dct",      /* LANGUAGE_ITALIAN     */
+    $PREFIX "Swedish.dct",      /* LANGUAGE_SWEDISH     */
+    $PREFIX "Norwegian.dct",    /* LANGUAGE_NORWEGIAN   */
+    $PREFIX "Dutch.dct",        /* LANGUAGE_DUTCH       */
+    $PREFIX "Danish.dct",       /* LANGUAGE_DANISH      */
+    $PREFIX "Portuguese.dct",   /* LANGUAGE_PORTUGUESE  */
+    $PREFIX "Brazilian.dct",    /* LANGUAGE_PORTUGUESEB */
+    $PREFIX "MedicalUS.dct",    /* LANGUAGE_MEDICAL     */
+    $PREFIX "Finnish.dct",      /* LANGUAGE_FINNISH     */
+    $PREFIX "Indonesian.dct",   /* LANGUAGE_INDONESIAN  */
+    $PREFIX "EnglishUK.dct",    /* LANGUAGE_ENGLISHUK   */
 };
 
 #endif //__WPDICTIONARIES_H

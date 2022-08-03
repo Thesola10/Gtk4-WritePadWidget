@@ -1,4 +1,5 @@
 #include "WritePadWidget.impl.h"
+#include "WPDictionaries.gen.h"
 
 G_DEFINE_TYPE_WITH_CODE(WritePadWidget, WritePadWidget, GTK_TYPE_WIDGET, NULL);
 
@@ -12,14 +13,29 @@ GParamSpec *_impl_WritePadWidget_props[N_PROPERTIES] = { NULL, };
 gpointer _impl_WritePadWidget_parent_class;
 
 
+static char *_fileInHome (const char *filename)
+{
+    const char *cdir = g_get_user_cache_dir();
+    char *result = calloc(strlen(cdir) + strlen(filename), sizeof(char));
+
+    strcpy(result, cdir);
+    strcat(result, filename);
+
+    return result;
+}
+
 void WritePadWidget_class_init(WritePadWidgetClass *cls)
 {
+    GObjectClass *ocls = G_OBJECT_CLASS(cls);
     GtkWidgetClass *wcls = GTK_WIDGET_CLASS(cls);
 
     wcls->snapshot      = _impl_WritePadWidget_snapshot;
     wcls->map           = _impl_WritePadWidget_map;
     wcls->unmap         = _impl_WritePadWidget_unmap;
     wcls->size_allocate = _impl_WritePadWidget_size_allocate;
+
+    ocls->set_property  = _impl_WritePadWidget_set_property;
+    ocls->get_property  = _impl_WritePadWidget_get_property;
 
     _impl_WritePadWidget_signals[WRITEPAD_RECOGNIZED] =
         g_signal_new("writepad-recognized", G_TYPE_FROM_CLASS(wcls),
@@ -32,10 +48,14 @@ void WritePadWidget_init(WritePadWidget *pad)
 {
     GtkGesture *gesture;
 
+    g_debug("English dict at %s\n", WP_DICT_DEFAULTS[LANGUAGE_ENGLISH]);
+    g_debug("User dict at %s\n", _fileInHome("/WritePad/User.dct"));
+
     int flags = 0;
     //TODO: Set recognizer language as a global parameter
+    //TODO: Map user files to global cache dir
     pad->recognizer = HWR_InitRecognizer("Dictionaries/English.dct",
-                                         "Dictionaries/User.dct",
+                                         "User.dct",
                                          "User.lrn", "User.cor",
                                          LANGUAGE_ENGLISH, &flags);
     HWR_SetRecognitionFlags(pad->recognizer,

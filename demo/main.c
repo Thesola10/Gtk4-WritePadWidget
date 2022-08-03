@@ -1,7 +1,7 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
-#include "widget/WritePadWidget.h"
+#include "../widget/WritePadWidget.h"
 
 static void myprint(WritePadWidget *wp, GString *msg)
 {

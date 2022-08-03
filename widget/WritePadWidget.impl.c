@@ -26,18 +26,17 @@ static void applyStroke    (WritePadWidget *w,
         cairo_set_line_width(w->cr, 4 * pressure * w->brush_size);
         cairo_set_operator(w->cr, CAIRO_OPERATOR_SATURATE);
         INK_AddPixelToStroke(w->inkData, w->nStrokes, x, y, pressure);
+
+        cairo_set_source_rgba(w->cr,
+                              w->draw_color.red,
+                              w->draw_color.green,
+                              w->draw_color.blue,
+                              w->draw_color.alpha);
+
+        cairo_line_to(w->cr, x, y);
+        cairo_stroke(w->cr);
+        cairo_move_to(w->cr, x, y);
     }
-
-    cairo_set_source_rgba(w->cr,
-                          w->draw_color.red,
-                          w->draw_color.green,
-                          w->draw_color.blue,
-                          w->draw_color.alpha);
-
-    cairo_line_to(w->cr, x, y);
-    cairo_stroke(w->cr);
-    cairo_move_to(w->cr, x, y);
-
 }
 
 void _impl_WritePadWidget_onStylusDown (GtkGestureStylus *st,
@@ -114,6 +113,30 @@ void _impl_WritePadWidget_onStylusUp   (GtkGestureStylus *st,
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+
+void _impl_WritePadWidget_set_property (GObject *obj,
+                                        guint propid,
+                                        const GValue *val,
+                                        GParamSpec *psp)
+{
+    WritePadWidget *pad = (WritePadWidget *)obj;
+
+    switch ((WritePadWidgetProperty) propid) {
+    case PROP_RECOGNIZER_LANGUAGE:
+        break;
+    default:
+        G_OBJECT_WARN_INVALID_PROPERTY_ID(obj, propid, psp);
+        break;
+    }
+}
+
+void _impl_WritePadWidget_get_property (GObject *obj,
+                                        guint propid,
+                                        GValue *val,
+                                        GParamSpec *psp)
+{
+
+}
 
 void _impl_WritePadWidget_snapshot(GtkWidget *w, GtkSnapshot *snap)
 {
