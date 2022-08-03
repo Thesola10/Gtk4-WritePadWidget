@@ -1,0 +1,28 @@
+#ifndef __WPDICTIONARIES_H
+#define __WPDICTIONARIES_H
+
+#include <langid.h>
+
+#define $dictFromPrefix(file) \
+        "@CMAKE_INSTALL_PREFIX@/share/WritePad/Dictionaries/##file##.dct"
+
+const char *WP_DICT_DEFAULTS[LANGUAGE_SIZE] = {
+    "",                                 /* LANGUAGE_NONE        */
+    $dictFromPrefix(English),           /* LANGUAGE_ENGLISH     */
+    $dictFromPrefix(French),            /* LANGUAGE_FRENCH      */
+    $dictFromPrefix(German),            /* LANGUAGE_GERMAN      */
+    $dictFromPrefix(Spanish),           /* LANGUAGE_SPANISH     */
+    $dictFromPrefix(Italian),           /* LANGUAGE_ITALIAN     */
+    $dictFromPrefix(Swedish),           /* LANGUAGE_SWEDISH     */
+    $dictFromPrefix(Norwegian),         /* LANGUAGE_NORWEGIAN   */
+    $dictFromPrefix(Dutch),             /* LANGUAGE_DUTCH       */
+    $dictFromPrefix(Danish),            /* LANGUAGE_DANISH      */
+    $dictFromPrefix(Portuguese),        /* LANGUAGE_PORTUGUESE  */
+    $dictFromPrefix(Brazilian),         /* LANGUAGE_PORTUGUESEB */
+    $dictFromPrefix(MedicalUS),         /* LANGUAGE_MEDICAL     */
+    $dictFromPrefix(Finnish),           /* LANGUAGE_FINNISH     */
+    $dictFromPrefix(Indonesian),        /* LANGUAGE_INDONESIAN  */
+    $dictFromPrefix(EnglishUK),         /* LANGUAGE_ENGLISHUK   */
+};
+
+#endif //__WPDICTIONARIES_H
