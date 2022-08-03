@@ -22,8 +22,10 @@ LINK_DIRECTORIES(${GTK4_LIBRARY_DIRS} ${source_dir}/Linux/Lib)
 
 ADD_DEFINITIONS(${GTK4_CFLAGS_OTHER})
 
-add_executable(writepad-demo main.c)
+add_subdirectory(widget)
 
-target_link_libraries(writepad-demo ${GTK4_LIBRARIES} m stdc++ WritePadLib pthread)
+add_executable(WritePadWidget-demo main.c)
+
+target_link_libraries(WritePadWidget-demo ${GTK4_LIBRARIES} WritePadWidget)
 
 file(COPY ${source_dir}/Dictionaries DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
