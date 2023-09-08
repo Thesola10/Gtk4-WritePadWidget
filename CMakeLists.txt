@@ -16,6 +16,7 @@ ExternalProject_Add(writepad
     BUILD_COMMAND make -C Linux
     BUILD_IN_SOURCE 1
     INSTALL_COMMAND ""
+    UPDATE_DISCONNECTED 1
     )
 
 ExternalProject_Get_Property(writepad source_dir)

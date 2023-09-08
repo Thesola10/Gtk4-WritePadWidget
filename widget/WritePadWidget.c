@@ -13,13 +13,10 @@ GParamSpec *_impl_WritePadWidget_props[N_PROPERTIES] = { NULL, };
 gpointer _impl_WritePadWidget_parent_class;
 
 
-static char *_fileInHome (const char *filename)
+static char *_fileInCache (const char *filename)
 {
     const char *cdir = g_get_user_cache_dir();
-    char *result = calloc(strlen(cdir) + strlen(filename), sizeof(char));
-
-    strcpy(result, cdir);
-    strcat(result, filename);
+    char *result = g_build_filename(cdir, filename, NULL);
 
     return result;
 }
@@ -49,14 +46,15 @@ void WritePadWidget_init(WritePadWidget *pad)
     GtkGesture *gesture;
 
     g_debug("English dict at %s\n", WP_DICT_DEFAULTS[LANGUAGE_ENGLISH]);
-    g_debug("User dict at %s\n", _fileInHome("/WritePad/User.dct"));
+    g_debug("User dict at %s\n", _fileInCache("/WritePad/User.dct"));
 
     int flags = 0;
     //TODO: Set recognizer language as a global parameter
-    //TODO: Map user files to global cache dir
-    pad->recognizer = HWR_InitRecognizer("Dictionaries/English.dct",
-                                         "User.dct",
-                                         "User.lrn", "User.cor",
+    g_mkdir_with_parents(_fileInCache("/WritePad"), 0755);
+    pad->recognizer = HWR_InitRecognizer(WP_DICT_DEFAULTS[LANGUAGE_ENGLISH],
+                                         _fileInCache("/WritePad/User.dct"),
+                                         _fileInCache("/WritePad/User.lrn"),
+                                         _fileInCache("/WritePad/User.cor"),
                                          LANGUAGE_ENGLISH, &flags);
     HWR_SetRecognitionFlags(pad->recognizer,
                             FLAG_USERDICT &
@@ -80,6 +78,12 @@ void WritePadWidget_init(WritePadWidget *pad)
 
     pad->draw_color = (GdkRGBA){0, 0, 0, 1};
     pad->brush_size = 1;
+
+    _impl_WritePadWidget_props[PROP_RECOGNIZER_LANGUAGE] =
+        g_param_spec_enum("recognizer-language", "WritePad recognition language",
+                          "The language and dictionary the WritePad recognition engine should use.",
+                          NULL, LANGUAGE_ENGLISH,
+                          G_PARAM_READWRITE|G_PARAM_EXPLICIT_NOTIFY|G_PARAM_CONSTRUCT);
 }
 
 GtkWidget *WritePadWidget_new(void) { return g_object_new(WPAD_TYPE_WIDGET, NULL); }
