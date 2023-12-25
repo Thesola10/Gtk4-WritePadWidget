@@ -3,7 +3,8 @@
 
 #include <langid.h>
 
-#define $PREFIX "@CMAKE_INSTALL_PREFIX@/share/WritePad/Dictionaries/"
+#define stringify$(s) #s
+#define $PREFIX stringify$(CMAKE_INSTALL_PREFIX) "/share/WritePad/Dictionaries/"
 
 const char *WP_DICT_DEFAULTS[LANGUAGE_SIZE] = {
     "",                         /* LANGUAGE_NONE        */

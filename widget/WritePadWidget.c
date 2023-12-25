@@ -1,5 +1,5 @@
 #include "WritePadWidget.impl.h"
-#include "WPDictionaries.gen.h"
+#include "WPDictionaries.h"
 
 G_DEFINE_TYPE_WITH_CODE(WritePadWidget, WritePadWidget, GTK_TYPE_WIDGET, NULL);
 

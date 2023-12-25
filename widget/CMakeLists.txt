@@ -1,6 +1,6 @@
-configure_file(WPDictionaries.h.in WPDictionaries.gen.h @ONLY)
-
 INCLUDE_DIRECTORIES(${CMAKE_BINARY_DIR}/widget)
+
+add_compile_definitions(CMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX})
 
 add_library(WritePadWidget STATIC)
 target_sources(WritePadWidget
